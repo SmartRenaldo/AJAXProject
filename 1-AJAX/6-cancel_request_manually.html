@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #res {
+            width: 200px;
+            height: 100px;
+            border: solid 1px #258;
+        }
+    </style>
+</head>
+
+<body>
+    <button id='send'>Send</button>
+    <button id='cancle'>Cancle</button>
+    <div id="res"></div>
+    <script>
+        let send = document.getElementById('send');
+        let cancle = document.getElementById('cancle');
+        let res = document.querySelector('#res');
+        let xhr = null;
+
+        send.addEventListener('click', function () {
+            xhr = new XMLHttpRequest();
+
+            xhr.open("GET", 'http://127.0.0.1:3030/delay');
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        res.innerHTML = xhr.response;
+                    }
+                }
+            }
+        });
+
+        cancle.addEventListener('click', function () {
+            xhr.abort();
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #res{
+            width:200px;
+            height:100px;
+            border:solid 1px #89b;
+        }
+    </style>
+</head>
+<body>
+    <div id="res"></div>
+    <script>
+        const res = document.getElementById('res');
+
+        window.onclick = function() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET','http://127.0.0.1:3030/server-json');
+            // set rewsponse type, so xhr can help us handle json 'xhr.response.name'
+            xhr.responseType = 'json';
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        // 1. Convert data manually
+                        // let data = JSON.parse(xhr.response);
+                        // console.log(data);
+                        // res.innerHTML = data.name;
+
+                        // 2. Convert data automatically
+                        res.innerHTML = xhr.response.name;
+                    }
+                }
+            };
+        }
+    </script>
+</body>
+</html>
