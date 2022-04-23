@@ -1,0 +1,30 @@
+<!-- use chrome to open this page ('http://127.0.0.1:3030/home'), 
+    not directly right click and select 'Open with Live Server' -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>GET USER DATA</button>
+    <script>
+        const btn = document.querySelector('button');
+        btn.onclick = function () {
+            const x = new XMLHttpRequest();
+            // host are the same as server, so can only write '/data'
+            x.open("GET",'/data');
+            x.send();
+            x.onreadystatechange = function(){
+                if(x.readyState === 4){
+                    if(x.status >= 200 && x.status < 300){
+                        console.log(x.response);
+                    }
+                }
+            }
+        };
+    </script>
+</body>
+</html>
